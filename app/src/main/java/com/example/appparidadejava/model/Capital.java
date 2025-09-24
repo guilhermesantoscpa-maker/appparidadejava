@@ -1,39 +1,30 @@
 package com.example.appparidadejava.model;
 
-public class Capital {
+import java.io.Serializable;
+
+public class Capital implements Serializable {
+    // Campos do JSON
     private String nome;
-    private String estado;
+    private String estado; // Esta é a sigla
     private double latitude;
     private double longitude;
 
-    public Capital(String nome, String estado, double latitude, double longitude) {
-        this.nome = nome;
-        this.estado = estado;
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
+    // Novos campos que virão da API
+    private String estadoNome;
+    private String regiaoNome;
+    private int estadoId;
 
-    public String getNome() {
-        return nome;
-    }
+    // Getters para todos os campos
+    public String getNome() { return nome; }
+    public String getEstado() { return estado; }
+    public double getLatitude() { return latitude; }
+    public double getLongitude() { return longitude; }
+    public String getEstadoNome() { return estadoNome; }
+    public String getRegiaoNome() { return regiaoNome; }
+    public int getEstadoId() { return estadoId; }
 
-    public String getEstado() {
-        return estado;
-    }
-
-    public double getLatitude() {
-        return latitude;
-    }
-
-    public double getLongitude() {
-        return longitude;
-    }
-
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
-
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
-    }
+    // Setters para os novos campos (usaremos na MainActivity)
+    public void setEstadoNome(String estadoNome) { this.estadoNome = estadoNome; }
+    public void setRegiaoNome(String regiaoNome) { this.regiaoNome = regiaoNome; }
+    public void setEstadoId(int estadoId) { this.estadoId = estadoId; }
 }

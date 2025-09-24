@@ -6,24 +6,32 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.appparidadejava.DetailActivity;
 import com.example.appparidadejava.R;
 import com.example.appparidadejava.model.Capital;
-
+import java.util.ArrayList;
 import java.util.List;
 
 public class CapitalAdapter extends RecyclerView.Adapter<CapitalAdapter.ViewHolder> {
 
-    private List<Capital> lista;
+    private List<Capital> listaExibida;
+    private List<Capital> listaCompleta;
     private Context context;
 
     public CapitalAdapter(Context context, List<Capital> lista) {
         this.context = context;
-        this.lista = lista;
+        this.listaExibida = lista;
+        this.listaCompleta = new ArrayList<>(lista);
+    }
+
+    public void updateData(List<Capital> novaLista) {
+        listaExibida.clear();
+        listaExibida.addAll(novaLista);
+        listaCompleta.clear();
+        listaCompleta.addAll(novaLista);
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -36,24 +44,39 @@ public class CapitalAdapter extends RecyclerView.Adapter<CapitalAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Capital c = lista.get(position);
-        holder.txtNome.setText(c.getNome());
-        holder.txtEstado.setText(c.getEstado());
+        Capital capitalAtual = listaExibida.get(position);
+        holder.txtNome.setText(capitalAtual.getNome());
+        holder.txtEstado.setText(capitalAtual.getEstado());
 
-        // Ao clicar no item, abre DetailActivity com extras
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, DetailActivity.class);
-            intent.putExtra("nome", c.getNome());
-            intent.putExtra("estado", c.getEstado());
-            intent.putExtra("latitude", c.getLatitude());
-            intent.putExtra("longitude", c.getLongitude());
+            intent.putExtra("CAPITAL_SELECIONADA", capitalAtual);
+
+            // ALTERAÇÃO: Envia o tempo de início para a próxima tela
+            intent.putExtra("startTime", System.currentTimeMillis());
+
             context.startActivity(intent);
         });
     }
 
     @Override
     public int getItemCount() {
-        return lista != null ? lista.size() : 0;
+        return listaExibida != null ? listaExibida.size() : 0;
+    }
+
+    public void filter(String text) {
+        listaExibida.clear();
+        if (text.isEmpty()) {
+            listaExibida.addAll(listaCompleta);
+        } else {
+            text = text.toLowerCase();
+            for (Capital item : listaCompleta) {
+                if (item.getNome().toLowerCase().contains(text) || item.getEstado().toLowerCase().contains(text)) {
+                    listaExibida.add(item);
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

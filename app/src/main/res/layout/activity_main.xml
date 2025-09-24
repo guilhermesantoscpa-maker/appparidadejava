@@ -1,46 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="16dp"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
 
-    <TextView
-        android:text="@string/capitais_do_brasil"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_main"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:title="Capitais do Brasil"
+        app:titleTextColor="@android:color/white" />
 
-    <EditText
-        android:id="@+id/edtBusca"
-        android:hint="@string/buscar_capital"
-        android:inputType="text"
-        android:autofillHints="name"
+    <LinearLayout
+        android:id="@+id/layoutTopo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:layout_marginHorizontal="16dp"
-        android:textColor="@android:color/black"
-        android:background="@android:drawable/edit_text" />
+        android:layout_below="@id/toolbar_main"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerCapitais"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginHorizontal="8dp" />
+        <EditText
+            android:id="@+id/edtBusca"
+            android:hint="Buscar por capital ou sigla do estado..."
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:inputType="text" />
+    </LinearLayout>
 
     <Button
-        android:id="@+id/btnLocalizacao"
-        android:text="@string/obter_localizacao"
-        android:backgroundTint="#1976D2"
-        android:textColor="@android:color/white"
+        android:id="@+id/btnObterLocalizacao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Obter Localização Atual" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/layoutTopo"
+        android:layout_above="@id/btnObterLocalizacao"
+        android:paddingHorizontal="8dp"
+        android:visibility="gone"
+        tools:visibility="visible"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:minHeight="48dp"
-        android:paddingHorizontal="24dp" />
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        tools:visibility="visible" />
 
-</LinearLayout>
+</RelativeLayout>

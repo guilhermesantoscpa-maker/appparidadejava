@@ -1,39 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="24dp"
-    android:gravity="center_horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".DetailActivity">
 
-    <TextView
-        android:id="@+id/txtNome"
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:theme="@style/ActionBarWithBackArrow">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:text="Belo Horizonte" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nome da Capital"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"
-        android:layout_marginBottom="12dp" />
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <TextView
-        android:id="@+id/txtEstado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Estado"
-        android:textSize="20sp"
-        android:textColor="@android:color/darker_gray"
-        android:layout_marginBottom="16dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dados do Estado (via API):"
+            android:textSize="14sp"
+            android:textStyle="italic" />
 
+        <TextView
+            android:id="@+id/txtEstadoNome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            tools:text="Minas Gerais" />
 
+        <TextView
+            android:id="@+id/txtRegiao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="16sp"
+            tools:text="Região: Sudeste" />
 
-    <!-- NOVO: campo para mostrar a distância -->
-    <TextView
-        android:id="@+id/txtDistancia"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Distância: -- km"
-        android:textSize="18sp"
-        android:textColor="@android:color/holo_blue_dark" />
+        <TextView
+            android:id="@+id/txtSigla"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="16sp"
+            tools:text="Sigla: MG" />
+
+        <TextView
+            android:id="@+id/txtIdIbge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="16sp"
+            tools:text="ID (IBGE): 31" />
+
+        <TextView
+            android:id="@+id/txtDistancia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="Distância até sua localização: 250.15 km" />
+
+    </LinearLayout>
 
 </LinearLayout>
